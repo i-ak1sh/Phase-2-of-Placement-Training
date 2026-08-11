@@ -1,0 +1,136 @@
+import java.util.Scanner;
+class BankAccount {
+    private String customerName;
+    private String accountNumber;
+    private String phoneNumber;
+    private double balance;
+
+    public BankAccount(String customerName, String accountNumber, String phoneNumber, double balance) {
+        this.customerName = customerName;
+        this.accountNumber = accountNumber;
+        this.phoneNumber = phoneNumber;
+        this.balance = balance;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposit successful.");
+        } else {
+            System.out.println("Invalid amount.");
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrawal successful.");
+        } else {
+            System.out.println("Insufficient balance or invalid amount.");
+        }
+    }
+
+    public void checkBalance() {
+        System.out.println("Current Balance: ₹" + balance);
+    }
+
+    public void displayCustomerDetails() {
+        System.out.println("Customer Name: " + customerName);
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Phone Number: " + phoneNumber);
+        System.out.println("Balance: ₹" + balance);
+    }
+}
+
+public class BankingSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Customer Name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter Account Number: ");
+        String accountNumber = sc.nextLine();
+
+        System.out.print("Enter Phone Number: ");
+        String phone = sc.nextLine();
+
+        System.out.print("Enter Initial Balance: ");
+        double balance = sc.nextDouble();
+
+        BankAccount account = new BankAccount(name, accountNumber, phone, balance);
+
+        int choice;
+
+        do {
+            System.out.println("\n1. Deposit");
+            System.out.println("2. Withdraw");
+            System.out.println("3. Check Balance");
+            System.out.println("4. Customer Details");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter deposit amount: ");
+                    account.deposit(sc.nextDouble());
+                    break;
+
+                case 2:
+                    System.out.print("Enter withdrawal amount: ");
+                    account.withdraw(sc.nextDouble());
+                    break;
+
+                case 3:
+                    account.checkBalance();
+                    break;
+
+                case 4:
+                    account.displayCustomerDetails();
+                    break;
+
+                case 5:
+                    System.out.println("Thank you for using our banking system.");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice.");
+            }
+        } while (choice != 5);
+
+        sc.close();
+    }
+}
