@@ -1,0 +1,123 @@
+import java.util.Scanner;
+
+class Employee {
+    private int employeeId;
+    private String employeeName;
+    private String department;
+
+    public Employee(int employeeId, String employeeName, String department) {
+        this.employeeId = employeeId;
+        this.employeeName = employeeName;
+        this.department = department;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+}
+
+class Payslip extends Employee {
+    private double basicPay;
+    private double deduction;
+    private double travelAllowance;
+
+    public Payslip(int employeeId, String employeeName, String department,
+                   double basicPay, double deduction, double travelAllowance) {
+        super(employeeId, employeeName, department);
+        this.basicPay = basicPay;
+        this.deduction = deduction;
+        this.travelAllowance = travelAllowance;
+    }
+
+    public double getBasicPay() {
+        return basicPay;
+    }
+
+    public void setBasicPay(double basicPay) {
+        this.basicPay = basicPay;
+    }
+
+    public double getDeduction() {
+        return deduction;
+    }
+
+    public void setDeduction(double deduction) {
+        this.deduction = deduction;
+    }
+
+    public double getTravelAllowance() {
+        return travelAllowance;
+    }
+
+    public void setTravelAllowance(double travelAllowance) {
+        this.travelAllowance = travelAllowance;
+    }
+
+    public double calculateSalary() {
+        return basicPay + travelAllowance - deduction;
+    }
+
+    public void displayPayslip() {
+        System.out.println("\n----- EMPLOYEE PAYSLIP -----");
+        System.out.println("Employee ID       : " + getEmployeeId());
+        System.out.println("Employee Name     : " + getEmployeeName());
+        System.out.println("Department        : " + getDepartment());
+        System.out.println("Basic Pay         : " + basicPay);
+        System.out.println("Travel Allowance  : " + travelAllowance);
+        System.out.println("Deduction         : " + deduction);
+        System.out.println("Net Salary        : " + calculateSalary());
+    }
+}
+
+public class PayslipGenerator {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Employee ID: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+
+        System.out.print("Enter Employee Name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter Department: ");
+        String department = sc.nextLine();
+
+        System.out.print("Enter Basic Pay: ");
+        double basicPay = sc.nextDouble();
+
+        System.out.print("Enter Deduction: ");
+        double deduction = sc.nextDouble();
+
+        System.out.print("Enter Travel Allowance: ");
+        double travelAllowance = sc.nextDouble();
+
+        Payslip employee = new Payslip(
+            id, name, department, basicPay, deduction, travelAllowance
+        );
+
+        employee.displayPayslip();
+
+        sc.close();
+    }
+}
