@@ -1,0 +1,9 @@
+class BusDetails
+{
+	String studentName;
+	int rollNo;
+	String dropPoint;
+	int busNo;
+	String driverName;
+	int driverNum;
+}
